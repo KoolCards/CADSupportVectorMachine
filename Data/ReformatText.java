@@ -48,7 +48,7 @@ public class ReformatText {
 			}
 
 			FileWriter writer = new FileWriter("C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/ClevelandData.txt");
-			writer.write("patientNumber     patientAge     patientSex     patientBloodPressure     patientECG     patientCholestoral");
+			writer.write("patientNumber | patientAge | patientSex | patientBloodPressure | patientECG | patientCholestoral");
 			writer.flush();
 			writer.write(System.getProperty("line.separator"));
 			int counter = 0;
@@ -65,14 +65,14 @@ public class ReformatText {
 				counter++;
 			}
 			writer.close();
-			reformatHungaria();
+			reformatVirginia();
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void reformatHungaria ()	{
+	public static void reformatVirginia()	{
 		try (BufferedReader br = new BufferedReader(new FileReader("C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/HeartDiseaseVirginia.txt"))) {
 			String currentChar = "";
 			int line = 1;
@@ -88,7 +88,7 @@ public class ReformatText {
 				patientNumber.add(line);
 				patientAge.add(currentChar.substring(0, 2));
 				patientSex.add(currentChar.charAt(3));
-				if (currentChar.charAt(7) == '9')	{
+				if (currentChar.charAt(7) == '9') {
 					patientBloodPressure.add(currentChar.substring(7,9));
 				}
 				else if (currentChar.charAt(7) == '?')	{
@@ -110,10 +110,10 @@ public class ReformatText {
 			}
 			int counter = 0;
 			FileWriter writer = new FileWriter("C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/VirginiaData.txt");
-			writer.write("patientNumber     patientAge     patientSex     patientBloodPressure     patientECG     patientCholestoral");
+			writer.write("patientNumber | patientAge | patientSex | patientBloodPressure | patientECG | patientCholestoral");
 			writer.write(System.getProperty("line.separator"));
 			while (counter < patientNumber.size()) {
-				if (patientCholestoral.get(counter) != "0" && patientECG.get(counter) != '9')	{
+				if (patientCholestoral.get(counter) != "0" && patientECG.get(counter) != '9') {
 					writer.write(patientNumber.get(counter) + " ");
 					writer.write(patientAge.get(counter) + " ");
 					writer.write(patientSex.get(counter) + " ");

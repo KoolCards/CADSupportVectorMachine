@@ -1,4 +1,4 @@
-patientNumber     patientAge     patientSex     patientBloodPressure     patientECG     patientCholestoral
+patientNumber | patientAge | patientSex | patientBloodPressure | patientECG | patientCholestoral
 1 63 1 145 2 233 
 2 67 1 160 2 286 
 3 67 1 120 2 229 
