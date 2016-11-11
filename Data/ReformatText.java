@@ -53,12 +53,12 @@ public class ReformatText {
 			writer.write(System.getProperty("line.separator"));
 			int counter = 0;
 			while (counter < patientNumber.size()) {
-				writer.write(patientNumber.get(counter) + " ");
-				writer.write(patientAge.get(counter) + " ");
-				writer.write(patientSex.get(counter) + " ");
-				writer.write(patientBloodPressure.get(counter) + " ");
-				writer.write(patientECG.get(counter) + " ");
-				writer.write(patientCholestoral.get(counter) + " ");
+				writer.write(patientNumber.get(counter) + ",");
+				writer.write(patientAge.get(counter) + ",");
+				writer.write(patientSex.get(counter) + ",");
+				writer.write(patientBloodPressure.get(counter) + ",");
+				writer.write(patientECG.get(counter) + ",");
+				writer.write(patientCholestoral.get(counter) + "");
 				writer.flush();
 				writer.write(System.getProperty("line.separator"));
 				writer.flush();
@@ -114,12 +114,12 @@ public class ReformatText {
 			writer.write(System.getProperty("line.separator"));
 			while (counter < patientNumber.size()) {
 				if (patientCholestoral.get(counter) != "0" && patientECG.get(counter) != '9') {
-					writer.write(patientNumber.get(counter) + " ");
-					writer.write(patientAge.get(counter) + " ");
-					writer.write(patientSex.get(counter) + " ");
-					writer.write(patientBloodPressure.get(counter) + " ");
-					writer.write(patientCholestoral.get(counter) + " ");
-					writer.write(patientECG.get(counter) + " ");
+					writer.write(patientNumber.get(counter) + ",");
+					writer.write(patientAge.get(counter) + ",");
+					writer.write(patientSex.get(counter) + ",");
+					writer.write(patientBloodPressure.get(counter) + ",");
+					writer.write(patientCholestoral.get(counter) + ",");
+					writer.write(patientECG.get(counter) + "");
 					writer.write(System.getProperty("line.separator"));
 					writer.flush();
 				}
