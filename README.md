@@ -1,2 +1,2 @@
 # HeartAttackPredict
-Prediction for heart attacks using machine learning algorithms
+A machine learning algorithm that uses patient data to provide real time predictions of heart attacks and strokes
