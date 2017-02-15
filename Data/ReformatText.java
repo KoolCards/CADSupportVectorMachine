@@ -1,133 +1,146 @@
 import java.io.FileWriter;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class ReformatText {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		try (BufferedReader br = new BufferedReader(new FileReader("C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/HeartDiseaseCleveland.txt"))) {
-			String currentChar = "";
-			int line = 1;
-			ArrayList<String> patientNumber = new ArrayList<String>();
-			ArrayList<String> patientAge = new ArrayList<String>();
-			ArrayList<Character> patientSex = new ArrayList<Character>();
-			ArrayList<String> patientBloodPressure = new ArrayList<String>();
-			ArrayList<Character> patientECG = new ArrayList<Character>();
-			ArrayList<String> patientCholestoral = new ArrayList<String>();
-			while (line < 2820) {
-				currentChar = br.readLine();
-				if (line % 10 == 1 && line < 80) {
-					patientNumber.add((currentChar.substring(0, 1)));
-					patientAge.add((currentChar.substring(4, 6)));
-					patientSex.add((currentChar.charAt(7)));
-				} 
-				else if (line % 10 == 2) {
-					patientBloodPressure.add((currentChar.substring(5, 8)));
-					patientCholestoral.add(currentChar.substring(11, 14));
-				} 
-				else if (line % 10 == 3 && currentChar.charAt(2) == '-') {
-					patientECG.add((currentChar.charAt(7)));
-				} 
-				else if (line % 10 == 3 && currentChar.charAt(2) == '1') {
-					patientECG.add((currentChar.charAt(6)));
-				}
-				if (line % 10 == 1 && line > 80 && line < 940) {
-					patientNumber.add((currentChar.substring(0, 2)));
-					patientAge.add((currentChar.substring(5, 7)));
-					patientSex.add((currentChar.charAt(8)));
-				}
-				if (line % 10 == 1 && line > 940) {
-					patientNumber.add((currentChar.substring(0, 3)));
-					patientAge.add((currentChar.substring(6, 8)));
-					patientSex.add((currentChar.charAt(9)));
-				}
-				line++;
+	public static void main(String[] args) throws IOException {
+		ReformatText Cleveland = new ReformatText();
+		/*String clevelandRead = "C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/SampleDataCleveland.txt";
+		String clevelandTempWrite = "C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/ClevelandData.txt";
+		String clevelandFinal = "C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/ClevelandTraining.txt";
+		Cleveland.commaParser(clevelandRead, clevelandTempWrite, 303);
+		Cleveland.cleanseData(clevelandTempWrite, clevelandFinal , 303);
+		ReformatText Hungary = new ReformatText();
+		String hungaryRead = "C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/SampleDataHungary.txt";
+		String hungaryTempWrite = "C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/HungaryDataTemp.txt";
+		String hungaryFinal = "C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/HungaryTraining.txt";
+		Hungary.commaParser(hungaryRead, hungaryTempWrite, 293);
+		Hungary.cleanseData(hungaryTempWrite, hungaryFinal , 293);
+		ReformatText Virginia = new ReformatText();
+		String virginiaRead = "C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/SampleDataVA.txt";
+		String virginiaTempWrite = "C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/VADataTemp.txt";
+		String virginiaFinal = "C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/VATraining.txt";
+		Virginia.commaParser(virginiaRead, virginiaTempWrite, 200);
+		Virginia.cleanseData(virginiaTempWrite, virginiaFinal , 200);
+		ReformatText Swiss = new ReformatText();
+		String swissRead = "C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/SampleDataSwiss.txt";
+		String swissWrite = "C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/SwissDataTemp.txt";
+		String swissFinal = "C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/SwissTraining.txt";
+		Swiss.commaParser(swissRead, swissWrite, 122);
+		Swiss.cleanseData(swissWrite, swissFinal , 122);*/
+		ReformatText Other = new ReformatText();
+		String otherRead = "C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/SampleDataOther.txt";
+		String otherWrite = "C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/OtherDataTemp.txt";
+		String otherFinal = "C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/OtherTraining.txt";
+		Other.otherParser(otherRead, otherWrite , 18492);
+		Other.otherCleanser(otherWrite, otherFinal, 1541);
+	}
+	public void otherParser (String locationRead, String locationWrite, int numLines) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(locationRead));
+		FileWriter writer = new FileWriter(locationWrite);
+		String currLine = "";
+		int line = 1;
+		while (line <= numLines) {
+			StringTokenizer ageLine = new StringTokenizer(br.readLine());
+			ageLine.nextToken(); ageLine.nextToken();
+			writer.write(" " + ageLine.nextToken() + " " + ageLine.nextToken());
+			StringTokenizer BP = new StringTokenizer(br.readLine());
+			BP.nextToken(); BP.nextToken();
+			writer.write(" " + BP.nextToken());
+			BP.nextToken();
+			writer.write(" " + BP.nextToken());
+			String temp =  br.readLine();
+			StringTokenizer st = new StringTokenizer(temp);
+			for (int i = 1; i <= 3; i++) {
+				st.nextToken();
 			}
-
-			FileWriter writer = new FileWriter("C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/ClevelandData.txt");
-			writer.write("patientNumber | patientAge | patientSex | patientBloodPressure | patientECG | patientCholestoral");
-			writer.flush();
+			writer.write(" " + st.nextToken() + " ");
+			System.out.println(line);
+			br.readLine();
+			StringTokenizer st2 = new StringTokenizer(br.readLine());
+			writer.write(st2.nextToken());
+			for (int i = 1; i <= 2; i++) {
+				br.readLine();
+			}
+			StringTokenizer st3 = new StringTokenizer(br.readLine());
+			st3.nextToken();
+			st3.nextToken();
+			writer.write(" " + st3.nextToken());
+			br.readLine();
+			br.readLine();
+			br.readLine();
 			writer.write(System.getProperty("line.separator"));
-			int counter = 0;
-			while (counter < patientNumber.size()) {
-				writer.write(patientNumber.get(counter) + ",");
-				writer.write(patientAge.get(counter) + ",");
-				writer.write(patientSex.get(counter) + ",");
-				writer.write(patientBloodPressure.get(counter) + ",");
-				writer.write(patientECG.get(counter) + ",");
-				writer.write(patientCholestoral.get(counter) + "");
-				writer.flush();
-				writer.write(System.getProperty("line.separator"));
-				writer.flush();
-				counter++;
-			}
-			writer.close();
-			reformatVirginia();
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
+			br.readLine();
+			line = line + 12;
 		}
+		writer.close();
+	}
+	
+	public void otherCleanser (String locationRead, String locationWrite, int numLines) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(locationRead));
+		FileWriter writer = new FileWriter(locationWrite);
+		String currLine = "";
+		int line = 1;
+		while (line <= numLines) { 
+			String tempStore = br.readLine();
+			StringTokenizer st = new StringTokenizer(tempStore);
+			if (!st.nextToken().equals("-9") && !st.nextToken().equals("-9") && !st.nextToken().equals("-9") && !st.nextToken().equals("-9") && !st.nextToken().equals("-9") && !st.nextToken().equals("-9") && !st.nextToken().equals("-9")) {
+				System.out.println("success");
+				writer.write(tempStore);
+				writer.write(System.getProperty("line.separator"));
+			}
+			line++;
+		}
+		writer.close();
 	}
 
-	public static void reformatVirginia()	{
-		try (BufferedReader br = new BufferedReader(new FileReader("C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/HeartDiseaseVirginia.txt"))) {
-			String currentChar = "";
-			int line = 1;
-			ArrayList<Integer> patientNumber = new ArrayList<Integer>();
-			ArrayList<String> patientAge = new ArrayList<String>();
-			ArrayList<Character> patientSex = new ArrayList<Character>();
-			ArrayList<String> patientBloodPressure = new ArrayList<String>();
-			ArrayList<Character> patientECG = new ArrayList<Character>();
-			ArrayList<String> patientCholestoral = new ArrayList<String>();
-			boolean [] isAbsent = new boolean[201];
-			while (line < 201)	{
-				currentChar = br.readLine();
-				patientNumber.add(line);
-				patientAge.add(currentChar.substring(0, 2));
-				patientSex.add(currentChar.charAt(3));
-				if (currentChar.charAt(7) == '9') {
-					patientBloodPressure.add(currentChar.substring(7,9));
+	public void commaParser (String locationRead, String locationWrite, int numLines) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(locationRead));
+		FileWriter writer = new FileWriter(locationWrite);
+		String currLine = "";
+		int line = 1;
+		while (line <= numLines) {
+			currLine = br.readLine();
+			for (int i = 0; i < currLine.length(); i++) {
+				if (currLine.charAt(i) == ',') {
+					writer.write(" ");
 				}
-				else if (currentChar.charAt(7) == '?')	{
-					patientBloodPressure.add("0");
-					isAbsent[line] = true;
+				else if (currLine.charAt(i) == '?') {
+					writer.write("2555");
 				}
 				else {
-					patientBloodPressure.add(currentChar.substring(7,10));
+					writer.write(currLine.charAt(i));
 				}
-				if (currentChar.charAt(11) != '0' && isAbsent[line] != true)
-					patientCholestoral.add(currentChar.substring(11,14));
-				else 
-					patientCholestoral.add("0");
-				if (currentChar.charAt(11) != '0' && currentChar.charAt(11) != '?'&& isAbsent[line] != true && patientCholestoral.get(line-1) != "0")
-					patientECG.add(currentChar.charAt(17));
-				else 
-					patientECG.add('9');
-				line++;
 			}
-			int counter = 0;
-			FileWriter writer = new FileWriter("C:/Users/kriss/Documents/MachineLearning/HeartAttackPredict/Data/VirginiaData.txt");
-			writer.write("patientNumber | patientAge | patientSex | patientBloodPressure | patientECG | patientCholestoral");
 			writer.write(System.getProperty("line.separator"));
-			while (counter < patientNumber.size()) {
-				if (patientCholestoral.get(counter) != "0" && patientECG.get(counter) != '9') {
-					writer.write(patientNumber.get(counter) + ",");
-					writer.write(patientAge.get(counter) + ",");
-					writer.write(patientSex.get(counter) + ",");
-					writer.write(patientBloodPressure.get(counter) + ",");
-					writer.write(patientCholestoral.get(counter) + ",");
-					writer.write(patientECG.get(counter) + "");
-					writer.write(System.getProperty("line.separator"));
-					writer.flush();
-				}
-				counter++;
+			line++;
+		}
+		System.out.println("done");
+		writer.close();
+	}
+	
+	public void cleanseData(String locationRead, String locationWrite, int numLines) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(locationRead));
+		FileWriter writer = new FileWriter(locationWrite);
+		int currLine = 1;
+		while (currLine <= numLines) { 
+			String tempStore = br.readLine();
+			StringTokenizer st = new StringTokenizer(tempStore);
+			for (int i = 1; i <= 7; i++) {
+				st.nextToken();
 			}
+			if (!st.equals("2555") && !st.nextToken().equals("2555")) {
+				System.out.println("success");
+				writer.write(tempStore);
+				writer.write(System.getProperty("line.separator"));
+			}
+			currLine++;
 		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+		writer.close();
 	}
 }
