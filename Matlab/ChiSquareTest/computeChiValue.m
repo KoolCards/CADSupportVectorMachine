@@ -1,4 +1,6 @@
   function chiValue = computeChiValue(observedMatrix)
+  
+  #Computes the chi-square score based on the chi-square equation
   m = size(observedMatrix,1);
   expectedValue = 0;
   absoluteSum = sum(observedMatrix(:,1)) + sum(observedMatrix(:,2));

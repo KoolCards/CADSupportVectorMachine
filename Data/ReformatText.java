@@ -64,9 +64,10 @@ public class ReformatText {
 			br.readLine();
 			StringTokenizer st2 = new StringTokenizer(br.readLine());
 			writer.write(st2.nextToken());
-			for (int i = 1; i <= 2; i++) {
+			StringTokenizer EKGO = new StringTokenizer(br.readLine());
+			writer.write(" " + EKGO.nextToken());
 				br.readLine();
-			}
+
 			StringTokenizer st3 = new StringTokenizer(br.readLine());
 			st3.nextToken();
 			st3.nextToken();

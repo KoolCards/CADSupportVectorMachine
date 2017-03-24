@@ -1,4 +1,6 @@
 function observedMatrix = sortData(observed_X, observed_y)
+
+  #Creates the chi-square table
   m = size(observed_X,1);
   tempYYstore = 0;
   tempYXstore = 0;
