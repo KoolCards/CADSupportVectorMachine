@@ -1,4 +1,4 @@
-# HeartAttackPredict
+# Coronary Artery Disease Support Vector Machine
 
 Improved Classification of Coronary Artery Disease through a Machine Learning Algorithm
 
