@@ -1,6 +1,6 @@
 function [Z_free, Z_affected] = organize(Z)
 
-  #Creates two datasets based on the diagnosis
+  %Creates two datasets based on the diagnosis
   [m n] = size(Z);
   affected_counter = 1;
   free_counter = 1;
