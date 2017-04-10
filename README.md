@@ -6,8 +6,8 @@ Coronary artery disease is the leading cause of heart attacks in the United Stat
 
 # Results
 
-Overall, the support vector machine algorithm improved upon the low accuracy and high intrusiveness of current coronary artery disease detection methods. The algorithm performed with a specificity of 91.8% compared to the current specificity of 37.5% through an ECG test, and trained the dataset with an accuracy of 92.3%. Additionally, the algorithm can be implemented in the future in conjunction with an ECG for real-time monitoring by patients.
+Overall, the support vector machine algorithm improved upon the low accuracy and high intrusiveness of current coronary artery disease detection methods. The algorithm performed with a specificity of 91.8% compared to the current specificity of 37.5% through an ECG test and trained the dataset with an accuracy of 92.3%. Additionally, the algorithm can be implemented in the future in conjunction with an ECG for real-time monitoring by patients.
 
-#Award
+# Award
 
 This algorithm won Honorable Mention (3rd Place) Category Award in Physical Sciences and Engineering.
